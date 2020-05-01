@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+    Route::get('/invoice-pdf', function () {
+        // return view('invoice-pdf');
+        $amount = 8900;
+        $users = App\User::take(10)->get();
+        //return $users;
+        $pdf = PDF::loadView('pdf.invoice',compact('amount','users'));
+        return $pdf->download('invoice.pdf');
+    });
+
